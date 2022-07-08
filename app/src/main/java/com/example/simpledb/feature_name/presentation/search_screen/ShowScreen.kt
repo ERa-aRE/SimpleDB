@@ -10,8 +10,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import dagger.hilt.android.AndroidEntryPoint
 
 
 @Composable
@@ -31,10 +29,10 @@ fun ShowScreen(/*navController: NavController*/viewModel: NamesViewModel= hiltVi
         Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween) {
             TextField(value =userInput , onValueChange ={userInput=it} )
-            Button(onClick = { viewModel.OnEvent(userInput) }) {
+            Button(onClick = { viewModel.onEvent(userInput) }) {
                 Text(text = "Search")
             }
-            Text(text =if(searchedNameID!=null) searchedNameID.toString() else "not Found" )
+            Text(text = searchedNameID?.toString() ?: "not Found")
 
         }
     }

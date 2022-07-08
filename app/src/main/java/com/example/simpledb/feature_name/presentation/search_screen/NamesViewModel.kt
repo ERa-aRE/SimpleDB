@@ -5,12 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.simpledb.feature_name.domain.model.Name
 import com.example.simpledb.feature_name.domain.use_case.NameUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -24,14 +21,13 @@ class NamesViewModel @Inject constructor(
     private val _state = mutableStateOf(NamesState())
     val state :State<NamesState> = _state
     var nameId = mutableStateOf<Int?>(null)
-    var userInput :String = "satan"
 
     ///
     private var getNamesJOb: Job? =null
     init {
         showNames()
     }
-    fun OnEvent(name:String){
+    fun onEvent(name:String){
         viewModelScope.launch {
             try {
 
@@ -46,7 +42,7 @@ class NamesViewModel @Inject constructor(
     }
 
 
-    fun showNames(){
+    private fun showNames(){
         getNamesJOb?.cancel()
         getNamesJOb=nameUseCases.getNames().onEach {
             names->
