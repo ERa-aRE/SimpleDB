@@ -1,0 +1,2 @@
+# SimpleDB
+// MVVM , clean architecture ( still working on it :) ) , application with jetpack compose // In this app , we can enter a name in the first screen of the app and then // we are able to see the name and it's id on the second screen , // Also there is a search section that allows us to look for // An specific name's Id , if there is not such a name in DB // Then we will see "name not found"
