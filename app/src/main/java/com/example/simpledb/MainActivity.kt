@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.simpledb.feature_name.presentation.insert_screen.AddNameScreen
 import com.example.simpledb.feature_name.presentation.search_screen.ShowScreen
+import com.example.simpledb.feature_name.presentation.util.Navigation
 import com.example.simpledb.ui.theme.SimpleDBTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,8 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ShowScreen()
-                    //AddNameScreen()
+                    Navigation()
 
                 }
             }
