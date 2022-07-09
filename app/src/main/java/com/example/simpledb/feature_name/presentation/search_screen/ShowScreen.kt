@@ -7,32 +7,47 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 
 @Composable
-fun ShowScreen(/*navController: NavController*/viewModel: NamesViewModel= hiltViewModel()) {
+fun ShowScreen(viewModel: NamesViewModel= hiltViewModel()) {
     val state = viewModel.state.value
     val scope = rememberCoroutineScope()
     var searchedNameID = viewModel.nameId.value
     var userInput by remember { mutableStateOf("") }
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(8.dp)) {
-        LazyColumn(modifier = Modifier.padding(5.dp) ){
+        .padding(8.dp),
+    verticalArrangement = Arrangement.SpaceEvenly) {
+        LazyColumn(modifier = Modifier
+            .padding(5.dp)
+            .weight(1f)){
             items(state.names){ name ->
                 NameItem(name = name, modifier = Modifier.fillMaxWidth())
             }
         }
-        Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween) {
-            TextField(value =userInput , onValueChange ={userInput=it} )
-            Button(onClick = { viewModel.onEvent(userInput) }) {
-                Text(text = "Search")
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp),
+            verticalArrangement = Arrangement.SpaceAround) {
+            TextField(value =userInput , onValueChange ={userInput=it}, modifier = Modifier.align(CenterHorizontally) )
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly) {
+                Button(onClick = { viewModel.onEvent(userInput) }) {
+                    Text(text = "Search")
+                }
+                Text(text = searchedNameID?.toString() ?: "not Found")
+
             }
-            Text(text = searchedNameID?.toString() ?: "not Found")
+
 
         }
     }
