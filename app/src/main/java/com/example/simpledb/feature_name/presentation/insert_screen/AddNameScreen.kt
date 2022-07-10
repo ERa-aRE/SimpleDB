@@ -37,8 +37,7 @@ fun AddNameScreen(navController:NavController,viewModel: InsertNameViewModel = h
 
 
         Button(modifier = Modifier.align(alignment = CenterHorizontally),onClick = {
-            viewModel._name.value = nameChange
-            viewModel.onEvent(InsertNameEvent.SaveName)
+            viewModel.onEvent(InsertNameEvent.SaveName, name = nameChange)
         }) {
             Icon(imageVector = Icons.Default.Save, contentDescription = "save button")
 
