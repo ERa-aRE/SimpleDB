@@ -1,9 +1,6 @@
 package com.example.simpledb.feature_name.presentation.insert_screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.TextField
@@ -33,21 +30,19 @@ fun AddNameScreen(navController:NavController,viewModel: InsertNameViewModel = h
     , verticalArrangement = Arrangement.Center
 
     ) {
-        TextField(value = nameChange, onValueChange = { nameChange = it }, modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
-
-
-
+        TextField(value = nameChange, onValueChange = { nameChange = it },
+            modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.padding(top = 18.dp))
 
 
 
         Button(modifier = Modifier.align(alignment = CenterHorizontally),onClick = {
-            viewModel._name.value = nameChange
-            viewModel.onEvent(InsertNameEvent.SaveName)
+            viewModel.onEvent(InsertNameEvent.SaveName, name = nameChange)
         }) {
             Icon(imageVector = Icons.Default.Save, contentDescription = "save button")
 
         }
-        Button(modifier = Modifier.align(alignment = CenterHorizontally),onClick = {
+        Button(modifier = Modifier.align(alignment = End),onClick = {
             navController.navigate(Screen.ShowScreen.route)
 
         }) {
