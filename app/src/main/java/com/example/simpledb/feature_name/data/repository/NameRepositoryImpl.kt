@@ -20,4 +20,12 @@ class NameRepositoryImpl(
     override suspend fun insertName(name: Name) {
         return dao.insertName(name = name)
     }
+
+    override suspend fun getNameById(id: Int): Name? {
+        return dao.getNameById(id)
+    }
+
+    override suspend fun deleteName(name: Name) {
+        return dao.deleteName(name)
+    }
 }

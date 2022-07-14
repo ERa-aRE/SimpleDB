@@ -14,4 +14,9 @@ interface NameRepository {
 
 
     suspend fun insertName(name: Name)
+
+    ///
+    suspend fun getNameById(id:Int) : Name?
+
+    suspend fun deleteName(name: Name)
 }

@@ -1,9 +1,6 @@
 package com.example.simpledb.feature_name.data.data_source
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.simpledb.feature_name.domain.model.Name
 import kotlinx.coroutines.flow.Flow
 
@@ -18,8 +15,16 @@ interface NameDao {
     @Query("SELECT id FROM name WHERE name= :name")
     suspend fun getNameByName(name:String ): Int?
 
+    //for getting a Name by Id
+    @Query("SELECT * FROM name WHERE id= :id")
+    suspend fun getNameById(id:Int): Name?
+
     //for inserting names into the db
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertName(name: Name)
+
+    //for deleting a name from the db
+    @Delete
+    suspend fun deleteName(name:Name)
 
 }

@@ -4,5 +4,7 @@ data class NameUseCases(
     val getNames: GetNames,
     val getName:GetName ,
     val addName: AddName,
+    val getNameById: GetNameById,
+    val deleteName: DeleteName,
 
 )

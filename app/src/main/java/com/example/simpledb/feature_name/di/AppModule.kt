@@ -6,10 +6,7 @@ import com.example.simpledb.NameApp
 import com.example.simpledb.feature_name.data.data_source.NameDataBase
 import com.example.simpledb.feature_name.data.repository.NameRepositoryImpl
 import com.example.simpledb.feature_name.domain.repository.NameRepository
-import com.example.simpledb.feature_name.domain.use_case.AddName
-import com.example.simpledb.feature_name.domain.use_case.GetName
-import com.example.simpledb.feature_name.domain.use_case.GetNames
-import com.example.simpledb.feature_name.domain.use_case.NameUseCases
+import com.example.simpledb.feature_name.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,7 +40,9 @@ object AppModule {
         return NameUseCases(
             getNames = GetNames(repository),
             getName = GetName(repository),
-            addName = AddName(repository)
+            addName = AddName(repository),
+            getNameById = GetNameById(repository),
+            deleteName = DeleteName(repository)
             )
     }
 }
