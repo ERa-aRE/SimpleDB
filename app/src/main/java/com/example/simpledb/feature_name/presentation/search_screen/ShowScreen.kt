@@ -3,6 +3,7 @@ package com.example.simpledb.feature_name.presentation.search_screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -11,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -21,8 +24,11 @@ fun ShowScreen(viewModel: NamesViewModel= hiltViewModel()) {
     val scope = rememberCoroutineScope()
     var searchedNameID = viewModel.nameId.value
     var userInput by remember { mutableStateOf("") }
-    var userIdInput by remember {
+    var userIdSInput by remember {
         mutableStateOf("")
+    }
+    var userIdInput by remember {
+        mutableStateOf(0)
     }
     Column(modifier = Modifier
         .fillMaxSize()
@@ -44,7 +50,7 @@ fun ShowScreen(viewModel: NamesViewModel= hiltViewModel()) {
                 .fillMaxWidth()
                 .padding(top = 10.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly) {
-                Button(onClick = { viewModel.onEvent(ShowScreenEvent.searchingName,userInput,userIdInput.toInt()) }) {
+                Button(onClick = { viewModel.onEvent(ShowScreenEvent.searchingName,userInput,userIdInput) }) {
                     Text(text = "Search")
                 }
                 Text(text = searchedNameID?.toString() ?: "nothing !")
@@ -54,13 +60,19 @@ fun ShowScreen(viewModel: NamesViewModel= hiltViewModel()) {
                 .fillMaxWidth()
                 .padding(top = 10.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly) {
-                TextField(value =userIdInput, onValueChange ={userIdInput=it} )
+                TextField(value =userIdSInput,
+                    onValueChange ={userIdSInput=it
+                                   userIdInput=userIdSInput.toInt()} ,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Default) ,
 
-                Button(onClick = { viewModel.onEvent(ShowScreenEvent.deletingName,userInput,userIdInput.toInt())
-                                    userIdInput=""}) { //this would crush the app if users input some string into the text field
+                )
+
+                Button(onClick = { viewModel.onEvent(ShowScreenEvent.deletingName,userInput,userIdInput)
+                                    userIdInput=0
+                                    userIdSInput=""}) {
                     Text(text = "Delete")
                 }
-                //Next feature would be : user cannot input an id that is > than the current max id of the db
+                //TODO "Next feature would be : user cannot input an id that is > than the current max id of the db"
 
 
             }

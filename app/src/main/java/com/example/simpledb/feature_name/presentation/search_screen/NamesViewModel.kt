@@ -35,7 +35,7 @@ class NamesViewModel @Inject constructor(
     }
     fun onEvent(event:ShowScreenEvent,name:String,id:Int){
         when(event){
-            is ShowScreenEvent.searchingName->{
+            is ShowScreenEvent.searchingName -> {
                 viewModelScope.launch {
                     try {
 
