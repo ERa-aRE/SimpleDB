@@ -19,7 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 
 @Composable
-fun ShowScreen(viewModel: NamesViewModel= hiltViewModel()) {
+fun ShowScreen(viewModel: NamesViewModel= hiltViewModel(),lastNameEntered:String?) {
     val state = viewModel.state.value
     val scope = rememberCoroutineScope()
     var searchedNameID = viewModel.nameId.value
@@ -72,10 +72,21 @@ fun ShowScreen(viewModel: NamesViewModel= hiltViewModel()) {
                                     userIdSInput=""}) {
                     Text(text = "Delete")
                 }
-                //TODO "Next feature would be : user cannot input an id that is > than the current max id of the db"
+                //TODO "Next feature would be :
+               // user cannot input an id that is > than the current max id of the db , i wanted to
+            // do it by passing the last entered name and getting its id but that is not good because if the
+            // user enters nothing , that would be a problem , so i searched and i thought to my self
+            // is there any kind of function in sqlLite that can get the last element of a table or not ? ,
+            // and good news , it seems that there are some function that can be used for this purpose"
+            // but i am still passing that name for the sake of learning how to pass a thing from one composable to
+            // another one,
 
 
             }
+             Text(text = "Last named Entered not long ago is : ${lastNameEntered}")
+
+
+
 
 
         }

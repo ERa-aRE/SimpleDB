@@ -1,9 +1,11 @@
 package com.example.simpledb.feature_name.presentation.util
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.simpledb.feature_name.presentation.insert_screen.AddNameScreen
 import com.example.simpledb.feature_name.presentation.search_screen.ShowScreen
 
@@ -14,8 +16,15 @@ fun Navigation() {
         composable(route = Screen.AddNameScreen.route){
             AddNameScreen(navController=navController)
         }
-        composable(route = Screen.ShowScreen.route){
-            ShowScreen()
+        composable(route = Screen.ShowScreen.route ,
+            arguments = listOf(
+            navArgument("lastNameEntered"){
+                type = NavType.StringType
+                defaultValue = "NothingFromLastNavigationAction!"
+                nullable =true
+            }
+        )){entry ->
+            ShowScreen(lastNameEntered =entry.arguments?.getString("lastNameEntered"))
         }
 
     }

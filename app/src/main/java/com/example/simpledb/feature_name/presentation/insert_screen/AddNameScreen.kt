@@ -43,7 +43,9 @@ fun AddNameScreen(navController:NavController,viewModel: InsertNameViewModel = h
 
         }
         Button(modifier = Modifier.align(alignment = CenterHorizontally),onClick = {
-            navController.navigate(Screen.ShowScreen.route)
+
+            navController.navigate(route = Screen.ShowScreen.passLastNameEntered(nameChange))
+
 
         }) {
             Icon(imageVector = Icons.Default.NavigateNext, contentDescription = "Next Page")
