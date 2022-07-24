@@ -6,5 +6,6 @@ data class NameUseCases(
     val addName: AddName,
     val getNameById: GetNameById,
     val deleteName: DeleteName,
+    val getTheLastId: GetTheLastId,
 
 )

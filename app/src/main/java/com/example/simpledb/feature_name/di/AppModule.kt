@@ -42,7 +42,7 @@ object AppModule {
             getName = GetName(repository),
             addName = AddName(repository),
             getNameById = GetNameById(repository),
-            deleteName = DeleteName(repository)
-            )
+            deleteName = DeleteName(repository),
+            getTheLastId=GetTheLastId(repository))
     }
 }

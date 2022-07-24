@@ -28,4 +28,9 @@ class NameRepositoryImpl(
     override suspend fun deleteName(name: Name) {
         return dao.deleteName(name)
     }
+    //
+
+    override suspend fun getTheLastId(): Int {
+        return dao.getTheLastId()
+    }
 }

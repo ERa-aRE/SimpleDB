@@ -27,4 +27,8 @@ interface NameDao {
     @Delete
     suspend fun deleteName(name:Name)
 
+    //getting last id (for confining the delete text field input
+    @Query("SELECT id FROM name ORDER BY id DESC LIMIT 1;")
+    suspend fun getTheLastId():Int
+
 }

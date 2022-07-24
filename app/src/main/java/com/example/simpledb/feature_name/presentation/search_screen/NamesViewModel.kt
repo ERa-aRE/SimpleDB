@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.absoluteValue
 
 @HiltViewModel
 class NamesViewModel @Inject constructor(
@@ -27,6 +28,7 @@ class NamesViewModel @Inject constructor(
     val state :State<NamesState> = _state
     var nameId = mutableStateOf<Int?>(null)
     val nameToDelete= mutableStateOf<Name?>(null)
+    var theLastId = 0
 
     ///
     private var getNamesJOb: Job? =null
@@ -54,8 +56,11 @@ class NamesViewModel @Inject constructor(
                         nameToDelete.value=nameUseCases.getNameById(id)
                         if(id==null || id==0 || id==-1 )Toast.makeText(getApplication(),"Id cannot be empty", Toast.LENGTH_SHORT).show()
                         if(nameToDelete.value!=null){
+                        theLastId = nameUseCases.getTheLastId()
+                            if (id<=theLastId){
                         nameUseCases.deleteName(nameToDelete.value!!)
-                            Toast.makeText(getApplication(),"name deleted successfully", Toast.LENGTH_SHORT).show()}
+                            Toast.makeText(getApplication(),"name deleted successfully", Toast.LENGTH_SHORT).show()}}
+                        else if(id>theLastId){Toast.makeText(getApplication(),"out of range", Toast.LENGTH_SHORT).show()}
 
                     }catch (e:Exception){
                         Log.e("error","cannot delete the name ${e.message}")

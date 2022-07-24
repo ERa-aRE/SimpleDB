@@ -19,4 +19,6 @@ interface NameRepository {
     suspend fun getNameById(id:Int) : Name?
 
     suspend fun deleteName(name: Name)
+    //
+    suspend fun getTheLastId():Int
 }
