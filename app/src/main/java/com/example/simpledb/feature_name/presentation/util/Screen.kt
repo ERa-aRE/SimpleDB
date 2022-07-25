@@ -9,6 +9,11 @@ sealed class Screen (val route:String){
 
         }
     }
+    object EditScreen :Screen("edit_screen/{name}/{id}"){
+        fun passNameAndId(name:String,id:Int):String{
+            return "edit_screen/$name/$id"
+        }
+    }
 
 
 

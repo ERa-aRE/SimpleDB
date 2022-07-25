@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.simpledb.feature_name.presentation.edtiName.EditNameScreen
 import com.example.simpledb.feature_name.presentation.insert_screen.AddNameScreen
 import com.example.simpledb.feature_name.presentation.search_screen.ShowScreen
 
@@ -23,8 +24,23 @@ fun Navigation() {
                 defaultValue = "NothingFromLastNavigationAction!"
                 nullable =true
             }
+
         )){entry ->
-            ShowScreen(lastNameEntered =entry.arguments?.getString("lastNameEntered"))
+            ShowScreen(navController=navController,lastNameEntered =entry.arguments?.getString("lastNameEntered"))
+        }
+        composable(route = Screen.EditScreen.route,
+        arguments = listOf(
+            navArgument("name"){
+                type = NavType.StringType
+            },
+            navArgument("id"){
+                type= NavType.IntType
+            }
+        )
+        ){entry->
+            EditNameScreen(navController = navController,
+                name = entry.arguments?.getString("name") ?:"J" ,
+                id = entry.arguments?.getInt("id") ?:0 , )
         }
 
     }
