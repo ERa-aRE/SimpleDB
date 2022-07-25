@@ -41,11 +41,14 @@ fun ShowScreen(viewModel: NamesViewModel= hiltViewModel(),lastNameEntered:String
             items(state.names){ name ->
                 /**we might have a problem here*/
                 name.id?.let {
-                    NameItem(name = name,
-                        modifier = Modifier.fillMaxWidth(),
-                        sendName = name.name,
-                        sendId = it,
-                        navController = navController)
+                    if(name.name!=""){
+                        NameItem(name = name,
+                            modifier = Modifier.fillMaxWidth(),
+                            sendName = name.name,
+                            sendId = it,
+                            navController = navController)
+                    }
+
                 }
             }
         }
